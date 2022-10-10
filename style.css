@@ -77,14 +77,6 @@ body{
   transition: var(--transition);
 }
 
-.music__player--progress{
-  position: absolute;
-}
-
-.speed{
-  position: absolute;
-}
-
 .music__player.playing{
   border-radius: 0 0 var(--radius) var(--radius);
 }
@@ -103,6 +95,61 @@ body{
   color: var(--green);
   outline: none;
   transition: var(--transition);
+}
+
+.music__player--progress{
+  position: absolute;
+  z-index: -1;
+  height: 10px;
+  width: 100%;
+  top: -10%;
+  background-color: var(--purple);
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+  transform: translateY(120%);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.music__player.playing .music__player--progress{
+  transform: translateY(0);
+  z-index: 0;
+}
+
+.progress{
+  position: absolute;
+  background-color: var(--green);
+  width: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.speed{
+  position: absolute;
+  height: 3.5rem;
+  font-size: inherit;
+  font-family: inherit;
+  color: var(--light);
+  background-color: var(--green);
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 0%);
+  display: grid;
+  place-items: center;
+  padding: 0.7rem 1rem 0.5rem;
+  border: 6px solid var(--green);
+  border-radius: 0 0 var(--radius) var(--radius);
+  z-index: -1;
+  cursor: pointer;
+}
+
+.speed:is(:hover, :focus){
+  background-color: var(--light);
+  color: var(--green);
+}
+
+.music__player.playing .speed{
+  transform: translate(-50%, 90%);
 }
 
 @keyframes ava-bg{
