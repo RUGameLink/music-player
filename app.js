@@ -19,8 +19,6 @@ function loadSongs(song) {
     audioTitle.innerText = song.title;
     audio.src = `${song.audio}`;
     audioImage.style.backgroundImage = `url('${song.cover}')`;
-    generateBars();
-
 }
 
 function isAudioPlaying() {
@@ -135,7 +133,7 @@ audio.addEventListener('timeupdate', updateProgressBar);
 
 progressContainer.addEventListener('click', updateProgressBarPlayPosition);
 
-const NBR_OF_BARS = window.screen.width / 33;
+let NBR_OF_BARS = 50;
 const ctx = new AudioContext();
 
     const audioSource = ctx.createMediaElementSource(audio);
@@ -152,6 +150,8 @@ const ctx = new AudioContext();
     const visualizerContainer = document.querySelector(".visualizer-container");
 
 function generateBars() {
+    NBR_OF_BARS = 0
+    NBR_OF_BARS = window.screen.width / 33
     for (let i = 0; i < NBR_OF_BARS; i++) {
 
         const bar = document.createElement("DIV");
@@ -183,5 +183,5 @@ function renderFrame() {
     window.requestAnimationFrame(renderFrame);
 
 }
-
+generateBars();
 renderFrame();
