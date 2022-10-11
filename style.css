@@ -52,7 +52,7 @@ body{
 }
 
 .music__img{
-    background-image: url(/photos/deep-space.jpg);
+    /*background-image: url(/photos/deep-space.jpg);*/
     background-size: cover;
     background-position: center center;
     height: 40vh;
