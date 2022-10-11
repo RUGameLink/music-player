@@ -1,3 +1,4 @@
+
 *,
 *::after,
 *::before {
@@ -18,48 +19,48 @@
   --transition: all 200ms cubic-bezier(0.74, 0.01, 0.39, 0.96);
 }
 
-body {
-  font-family: 'Rubik Mono One', sans-serif;
-  height: 100vh;
-  background: rgb(238, 174, 202);
-  background: linear-gradient(to top, #73eeee 0%, #9b65dd 100%);
-  animation: ava-bg 5s infinite alternate;
-  display: grid;
-  place-items: center;
+body{
+    font-family: 'Rubik Mono One', sans-serif;
+    height: 100vh;
+    background: rgb(238, 174, 202);
+    background: linear-gradient(to top, #73eeee 0%, #9b65dd 100%);
+    animation: ava-bg 5s infinite alternate;
+    display: grid;
+    place-items: center;
 }
 
-.music__container {
-  display: grid;
-  grid-gap: 1.5rem;
-  margin: 1.5rem;
-  position: relative;
-  z-index: 10;
-  max-width: 500px;
-  min-width: 40vw;
+.music__container{
+    display: grid;
+    grid-gap: 1.5rem;
+    margin: 1.5rem;
+    position: relative;
+    z-index: 10;
+    max-width: 500px;
+    min-width: 40vw;
 
 }
 
-.music__title {
-  color: var(--purple);
-  background-color: var(--light);
-  padding: 1.5rem 2.5rem;
-  width: 100%;
-  letter-spacing: -1.5px;
-  border-radius: var(--radius);
-  text-align: center;
-  text-shadow: 1px 1px 1px var(--black);
+.music__title{
+    color: var(--purple);
+    background-color: var(--light);
+    padding: 1.5rem 2.5rem;
+    width: 100%;
+    letter-spacing: -1.5px;
+    border-radius: var(--radius);
+    text-align: center;
+    text-shadow: 1px 1px 1px var(--black);
 }
 
-.music__img {
-  /*background-image: url(/photos/deep-space.jpg);*/
-  background-size: cover;
-  background-position: center center;
-  height: 40vh;
-  max-width: 100%;
-  border-radius: var(--radius);
+.music__img{
+    /*background-image: url(/photos/deep-space.jpg);*/
+    background-size: cover;
+    background-position: center center;
+    height: 40vh;
+    max-width: 100%;
+    border-radius: var(--radius);
 }
 
-.music__player {
+.music__player{
   background-color: var(--light);
   box-shadow: 0px 4px 4px var(--dark);
   border-radius: var(--radius);
@@ -76,11 +77,11 @@ body {
   transition: var(--transition);
 }
 
-.music__player.playing {
+.music__player.playing{
   border-radius: 0 0 var(--radius) var(--radius);
 }
 
-.action {
+.action{
   background-color: var(--light);
   color: var(--purple);
   font-size: 3rem;
@@ -90,13 +91,13 @@ body {
   text-shadow: 1px 1px 1px var(--black);
 }
 
-.action:is(:hover, :focus) {
+.action:is(:hover, :focus){
   color: var(--green);
   outline: none;
   transition: var(--transition);
 }
 
-.music__player--progress {
+.music__player--progress{
   position: absolute;
   z-index: -1;
   height: 10px;
@@ -110,12 +111,12 @@ body {
   cursor: pointer;
 }
 
-.music__player.playing .music__player--progress {
+.music__player.playing .music__player--progress{
   transform: translateY(0);
   z-index: 0;
 }
 
-.progress {
+.progress{
   position: absolute;
   background-color: var(--green);
   width: 0;
@@ -123,7 +124,7 @@ body {
   cursor: pointer;
 }
 
-.speed {
+.speed{
   position: absolute;
   height: 3.5rem;
   font-size: inherit;
@@ -142,12 +143,12 @@ body {
   cursor: pointer;
 }
 
-.speed:is(:hover, :focus) {
+.speed:is(:hover, :focus){
   background-color: var(--light);
   color: var(--green);
 }
 
-.music__player.playing .speed {
+.music__player.playing .speed{
   transform: translate(-50%, 90%);
 }
 
@@ -171,12 +172,11 @@ body {
   border-radius: var(--radius) var(--radius) 0 0;
 }
 
-@keyframes ava-bg {
-  from {
-    backgrop-filter: hue-rotate(0)
+@keyframes ava-bg{
+    from{
+      backgrop-filter: hue-rotate(0)
+    }
+    to{
+      backdrop-filter: hue-rotate(90deg);
+    }
   }
-
-  to {
-    backdrop-filter: hue-rotate(90deg);
-  }
-}

@@ -15,17 +15,17 @@ const speedNumber = document.querySelector('.speed p');
 const speedOptions = [1.0, 1.5, 2.0, 0.75];
 let speedIndex = 0;
 
-function loadSongs(song) {
+function loadSongs(song){
     audioTitle.innerText = song.title;
     audio.src = `${song.audio}`;
     audioImage.style.backgroundImage = `url('${song.cover}')`;
 }
 
-function isAudioPlaying() {
+function isAudioPlaying(){
     return musicPlayer.classList.contains('playing');
 }
 
-function playAudio() {
+function playAudio(){
     musicPlayer.classList.add('playing');
     playBtn.querySelector('i').classList.remove('ph-play');
     playBtn.querySelector('i').classList.add('ph-pause');
@@ -33,16 +33,16 @@ function playAudio() {
     audio.play();
 }
 
-function pauseAudio() {
+function pauseAudio(){
     musicPlayer.classList.remove('playing');
     playBtn.querySelector('i').classList.remove('ph-pause');
     playBtn.querySelector('i').classList.add('ph-play');
     audio.pause();
 }
 
-function prevSong() {
+function prevSong(){
     songIndex = songIndexTemp;
-    if (songIndex < 0) {
+    if(songIndex < 0){
         songIndex = songs.length - 1
     }
     loadSongs(songs[songIndex]);
@@ -50,14 +50,14 @@ function prevSong() {
     isAudioPlaying() === true ? playAudio() : pauseAudio();
 }
 
-function nextSong() {
+function nextSong(){
     songIndexTemp = songIndex;
     songIndex = getRandomIndex(songs.length - 1);
-    while (songIndex === songIndexTemp) {
+    while(songIndex === songIndexTemp){
         songIndex = getRandomIndex(songs.length - 1);
     }
     console.log(songIndex)
-    if (songIndex < 0) {
+    if(songIndex < 0){
         songIndex = songs.length - 1
     }
     loadSongs(songs[songIndex]);
@@ -68,16 +68,16 @@ function nextSong() {
 function getRandomIndex(max) {
     songIndex = 0;
     return Math.floor(Math.random() * max);
-}
+  }
 
 let songs;
 let songIndex = 0;
 let songIndexTemp = 0;
 
-async function retrieveSongFromServer() {
+async function retrieveSongFromServer(){
     await fetch('audio.json')
         .then((response) => {
-            if (!response.ok) {
+            if(!response.ok){
                 throw new Error('Ошибка загрузки списка треков');
             }
             return response.json();
@@ -93,19 +93,19 @@ async function retrieveSongFromServer() {
 
 retrieveSongFromServer();
 
-function updateProgressBarPlayPosition(e) {
+function updateProgressBarPlayPosition(e){
     const width = this.clientWidth;
     const clickX = e.offsetX;
     const { duration } = audio;
     audio.currentTime = (clickX / width) * duration;
 }
 
-function updateProgressBar(e) {
-    const { duration, currentTime } = e.srcElement;
+function updateProgressBar(e){
+    const{ duration, currentTime} = e.srcElement;
     const progressPercentage = (currentTime / duration) * 100;
     progress.style.width = `${progressPercentage}%`;
     console.log(progressPercentage);
-    if (progressPercentage == 100) {
+    if(progressPercentage == 100){
         nextSong();
     }
 }
@@ -120,7 +120,7 @@ function updateSpeedIndicator() {
 }
 
 playBtn.addEventListener('click', () => {
-    isAudioPlaying() ? pauseAudio() : playAudio();
+    isAudioPlaying() ? pauseAudio(): playAudio();
 });
 
 prevBtn.addEventListener('click', prevSong);
@@ -132,52 +132,52 @@ audio.addEventListener('timeupdate', updateProgressBar);
 
 progressContainer.addEventListener('click', updateProgressBarPlayPosition);
 
-const NBR_OF_BARS = window.screen.width / 33;
+    const NBR_OF_BARS = window.screen.width / 33;
 
-const ctx = new AudioContext();
+       const ctx = new AudioContext();
 
-const audioSource = ctx.createMediaElementSource(audio);
+       const audioSource = ctx.createMediaElementSource(audio);
 
-const analayzer = ctx.createAnalyser();
+       const analayzer = ctx.createAnalyser();
 
-audioSource.connect(analayzer);
-audioSource.connect(ctx.destination);
+       audioSource.connect(analayzer);
+       audioSource.connect(ctx.destination);
 
-const frequencyData = new Uint8Array(analayzer.frequencyBinCount);
-analayzer.getByteFrequencyData(frequencyData);
-console.log("frequencyData", frequencyData);
+       const frequencyData = new Uint8Array(analayzer.frequencyBinCount);
+       analayzer.getByteFrequencyData(frequencyData);
+       console.log("frequencyData", frequencyData);
 
-const visualizerContainer = document.querySelector(".visualizer-container");
+       const visualizerContainer = document.querySelector(".visualizer-container");
 
-for (let i = 0; i < NBR_OF_BARS; i++) {
+       for( let i = 0; i < NBR_OF_BARS; i++ ) {
 
-    const bar = document.createElement("DIV");
-    bar.setAttribute("id", "bar" + i);
-    bar.setAttribute("class", "visualizer-container__bar");
-    visualizerContainer.appendChild(bar);
+           const bar = document.createElement("DIV");
+           bar.setAttribute("id", "bar" + i);
+           bar.setAttribute("class", "visualizer-container__bar");
+           visualizerContainer.appendChild(bar);
 
-}
+       }
 
-function renderFrame() {
-    analayzer.getByteFrequencyData(frequencyData);
+       function renderFrame() {
+           analayzer.getByteFrequencyData(frequencyData);
 
-    for (let i = 0; i < NBR_OF_BARS; i++) {
-        const index = (i + 10) * 2;
+           for( let i = 0; i < NBR_OF_BARS; i++ ) {
+               const index = (i + 10) * 2;
 
-        const fd = frequencyData[index];
+               const fd = frequencyData[index];
 
-        const bar = document.querySelector("#bar" + i);
-        if (!bar) {
-            continue;
-        }
+               const bar = document.querySelector("#bar" + i);
+               if( !bar ) {
+                   continue;
+               }
 
-        const barHeight = Math.max(4, fd || 0);
-        bar.style.height = barHeight + "px";
+               const barHeight = Math.max(4, fd || 0);
+               bar.style.height = barHeight + "px";
 
-    }
+           }
 
-    window.requestAnimationFrame(renderFrame);
+           window.requestAnimationFrame(renderFrame);
 
-}
+       }
 
-renderFrame();
+       renderFrame();
