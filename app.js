@@ -178,10 +178,8 @@ function renderFrame() {
 
         const barHeight = Math.max(4, fd || 0);
         bar.style.height = barHeight + "px";
-
     }
     window.requestAnimationFrame(renderFrame);
-
 }
 generateBars();
 renderFrame();
